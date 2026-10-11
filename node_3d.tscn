@@ -23,7 +23,7 @@ mesh = SubResource("CapsuleMesh_u35ib")
 shape = SubResource("CapsuleShape3D_u35ib")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.599546, 0, 0)
 mesh = SubResource("BoxMesh_u35ib")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]

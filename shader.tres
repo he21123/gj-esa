@@ -1,6 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://ci2gvpo6ox57c"]
 
 [ext_resource type="Shader" uid="uid://lgskfwxwqlr5" path="res://stylized.gdshader" id="1_a84kh"]
+[ext_resource type="Texture2D" uid="uid://bsannp66prjwi" path="res://shadertex.jpg" id="2_exf0p"]
 
 [resource]
 render_priority = 0
@@ -8,10 +9,10 @@ shader = ExtResource("1_a84kh")
 shader_parameter/albedo_color = Color(0.47058824, 0, 1, 1)
 shader_parameter/albedo_affect = 0.0
 shader_parameter/use_stepped = true
-shader_parameter/steps = 3.0
-shader_parameter/step_smoothness = 0.5000000074506
+shader_parameter/steps = 6.0
+shader_parameter/step_smoothness = 0.0
 shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/shadow_tint_amount = 0.40000000596048
 shader_parameter/specular = 0.0
 shader_parameter/normal_strength = 0.0
 shader_parameter/use_rim = true
@@ -21,8 +22,9 @@ shader_parameter/rim_smoothness = 0.2
 shader_parameter/rim_mask_shadow = 1.0
 shader_parameter/rim_blend = 1.0
 shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
+shader_parameter/pattern_texture = ExtResource("2_exf0p")
+shader_parameter/pattern_uv_mode = 0
+shader_parameter/pattern_tiling = 1.0
+shader_parameter/pattern_amount = 1.0
+shader_parameter/pattern_smoothness = 0.85000001266602
+shader_parameter/pattern_blend = 0.15000000223518

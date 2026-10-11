@@ -38,6 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_noarx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Camera3D" unique_id=1075592665]
+visible = false
 spot_attenuation = -1.51
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
@@ -45,7 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 1.4, -2.1)
 material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_u35ib")
-material = ExtResource("3_a0tk4")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
 transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
@@ -66,3 +66,10 @@ player = NodePath("../../CharacterBody3D")
 
 [node name="CharacterCollider" type="CollisionShape3D" parent="CharacterPreset" unique_id=1552628704]
 shape = SubResource("CylinderShape3D_pekrf")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=228057075]
+transform = Transform3D(1, 0, 0, 0, 0.030428912, 0.99953693, 0, -0.99953693, 0.030428912, -1.1899672, 3.7844906, 0.6909137)
+visible = false
+light_energy = 16.0
+light_volumetric_fog_energy = 0.0
+spot_range = 7.228477

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3edkqn3ybi08" path="res://playerMov.gd" id="1_a202f"]
 [ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://playerCam.gd" id="2_noarx"]
+[ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="3_a0tk4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u35ib"]
 
@@ -13,9 +14,10 @@
 
 [node name="Node3D" type="Node3D" unique_id=390946995]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=628959853]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=628959853 node_paths=PackedStringArray("camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_a202f")
+camera = NodePath("Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=503311582]
 mesh = SubResource("CapsuleMesh_u35ib")
@@ -26,14 +28,18 @@ shape = SubResource("CapsuleShape3D_u35ib")
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=392793311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_noarx")
-sens = null
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D/Camera3D" unique_id=1075592665]
+spot_attenuation = -1.51
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.599546, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6995459, 1.4, 0)
+material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_u35ib")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
 transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
+material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_pekrf")

@@ -52,10 +52,10 @@ material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_pekrf")
 
-[node name="CharacterBody3D2" type="CharacterBody3D" parent="." unique_id=1496790939]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+[node name="CharacterPreset" type="CharacterBody3D" parent="." unique_id=1496790939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 1, -2.6)
 
-[node name="CharacterPreset" type="MeshInstance3D" parent="CharacterBody3D2" unique_id=1492778076 node_paths=PackedStringArray("player")]
+[node name="CharacterMesh" type="MeshInstance3D" parent="CharacterPreset" unique_id=1492778076 node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_r3fl7")
 cast_shadow = 0
@@ -63,5 +63,5 @@ mesh = SubResource("QuadMesh_pekrf")
 script = ExtResource("4_r3fl7")
 player = NodePath("../../CharacterBody3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D2" unique_id=1552628704]
+[node name="CharacterCollider" type="CollisionShape3D" parent="CharacterPreset" unique_id=1552628704]
 shape = SubResource("CylinderShape3D_pekrf")

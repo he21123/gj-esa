@@ -1,7 +1,8 @@
 extends Camera3D
 
 @export var sens := 0.003
-
+var upLimit := -70
+var downLimit := 70
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,5 +10,5 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		# rotate
-		
+		rotate_y(-event.relative.x * sens)
+		rotate_x(-event.relative.y * sens)

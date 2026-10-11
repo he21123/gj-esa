@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d3edkqn3ybi08" path="res://playerMov.gd" id="1_a202f"]
 [ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://playerCam.gd" id="2_noarx"]
 [ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://b3ife71qabbjj" path="res://lookAt.gd" id="4_r3fl7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u35ib"]
 
@@ -11,6 +12,13 @@
 [sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pekrf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_pekrf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pekrf"]
 
 [node name="Node3D" type="Node3D" unique_id=390946995]
 
@@ -43,3 +51,17 @@ transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
 material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_pekrf")
+
+[node name="CharacterBody3D2" type="CharacterBody3D" parent="." unique_id=1496790939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="CharacterPreset" type="MeshInstance3D" parent="CharacterBody3D2" unique_id=1492778076 node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_r3fl7")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_pekrf")
+script = ExtResource("4_r3fl7")
+player = NodePath("../../CharacterBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D2" unique_id=1552628704]
+shape = SubResource("CylinderShape3D_pekrf")

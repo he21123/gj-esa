@@ -37,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 1.4, -2.1)
 material_override = ExtResource("3_a0tk4")
 use_collision = true
 mesh = SubResource("BoxMesh_u35ib")
+material = ExtResource("3_a0tk4")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
 transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)

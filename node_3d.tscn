@@ -30,8 +30,10 @@ sens = null
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.599546, 0, 0)
+use_collision = true
 mesh = SubResource("BoxMesh_u35ib")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
 transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
+use_collision = true
 mesh = SubResource("BoxMesh_pekrf")

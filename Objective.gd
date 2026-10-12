@@ -18,6 +18,9 @@ func text_vanish() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_visible_characters(0)
+	
+	
+	# TEST sollten wir rausnehmen später
 	set_text("test test test test test test test")
 	while true:
 		await text_appear()

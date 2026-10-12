@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://playerCam.gd" id="2_noarx"]
 [ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="3_a0tk4"]
 [ext_resource type="Script" uid="uid://b3ife71qabbjj" path="res://lookAt.gd" id="4_r3fl7"]
+[ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Objective.gd" id="5_jka67"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u35ib"]
 
@@ -72,3 +73,15 @@ visible = false
 light_energy = 16.0
 light_volumetric_fog_energy = 0.0
 spot_range = 7.228477
+
+[node name="UI" type="SubViewportContainer" parent="." unique_id=465995956]
+offset_right = 182.0
+offset_bottom = 96.0
+
+[node name="Objective" type="SubViewport" parent="UI" unique_id=1478293263]
+transparent_bg = true
+
+[node name="Label" type="Label" parent="UI/Objective" unique_id=1746348245]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("5_jka67")

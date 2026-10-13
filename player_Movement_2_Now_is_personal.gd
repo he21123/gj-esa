@@ -39,7 +39,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.z = move_toward(velocity.z, 0, SPEED)
-			if not Input.is_action_just_released("move_back") or not Input.is_action_just_released("move_forward") or not Input.is_action_just_released("move_left") or not Input.is_action_pressed("move_right"): 
+			
+			# ich hab mal die lange "if" schlange hier zerstört
+			if input_dir.length() == 0.0:
 				Current_State=STATE.IDLE
 				print("state change idle")
 		STATE.RUNNING:

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cnfe4aepknig4"]
 
 [ext_resource type="Script" uid="uid://danmh8luuh0qt" path="res://player_Movement_2_Now_is_personal.gd" id="1_kpjcp"]
-[ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://playerCam.gd" id="2_kne1u"]
+[ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://playerCam.gd" id="2_kpjcp"]
+[ext_resource type="Script" uid="uid://c22tp3mftva12" path="res://pickup.gd" id="3_kne1u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e80uo"]
 
@@ -19,8 +20,20 @@ mesh = SubResource("CapsuleMesh_cxr5p")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=620389596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("2_kne1u")
-crouch_speed = 2.0
+script = ExtResource("2_kpjcp")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1594203226]
-spot_attenuation = -1.51
+spot_attenuation = -0.56
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=172756908 node_paths=PackedStringArray("hold_point")]
+target_position = Vector3(0, 0, -2.4)
+hit_back_faces = false
+debug_shape_thickness = 4
+script = ExtResource("3_kne1u")
+PULL_STRENGTH = 25.0
+PULL_DAMP = 10.0
+MAX_ACCEL = 80.0
+hold_point = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="Camera3D" unique_id=815748724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)

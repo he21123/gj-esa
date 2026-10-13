@@ -2,19 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Player.tscn" id="1_i5arm"]
 [ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="3_a0tk4"]
-[ext_resource type="Script" uid="uid://b3ife71qabbjj" path="res://lookAt.gd" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://lift_object.tscn" id="5_i5arm"]
 [ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Objective.gd" id="5_jka67"]
+[ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://character_preset.tscn" id="5_wc5p8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pekrf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3fl7"]
-shading_mode = 0
-
-[sub_resource type="QuadMesh" id="QuadMesh_pekrf"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_pekrf"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_133d3"]
+rough = true
 
 [node name="Node3D" type="Node3D" unique_id=390946995]
 
@@ -32,20 +29,6 @@ mesh = SubResource("BoxMesh_pekrf")
 
 [node name="Player" parent="." unique_id=1649294839 instance=ExtResource("1_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74863744, 0)
-
-[node name="CharacterPreset" type="CharacterBody3D" parent="." unique_id=1496790939]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 1, -2.6)
-
-[node name="CharacterMesh" type="MeshInstance3D" parent="CharacterPreset" unique_id=1492778076 node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_r3fl7")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_pekrf")
-script = ExtResource("4_r3fl7")
-player = NodePath("../../Player")
-
-[node name="CharacterCollider" type="CollisionShape3D" parent="CharacterPreset" unique_id=1552628704]
-shape = SubResource("CylinderShape3D_pekrf")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=228057075]
 transform = Transform3D(1, 0, 0, 0, 0.030428912, 0.99953693, 0, -0.99953693, 0.030428912, -1.1899672, 1.6029043, 0.6909137)
@@ -68,3 +51,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("5_jka67")
 steps = 50.0
+
+[node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("5_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 0.5, -0.8)
+physics_material_override = SubResource("PhysicsMaterial_133d3")
+
+[node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_wc5p8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 1.1367846, 0)
+player = NodePath("../Player")

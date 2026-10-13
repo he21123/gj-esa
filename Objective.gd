@@ -30,8 +30,8 @@ func _ready() -> void:
 		await hide_objective()
 		await sleep(5)
 
-func show_objective(text: String) -> void:
-	set_text(text)
+func show_objective(txt: String) -> void:
+	set_text(txt)
 	await text_appear()
 	
 func hide_objective():

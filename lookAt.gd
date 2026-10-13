@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends CharacterBody3D
 
 @export var player: CharacterBody3D
 

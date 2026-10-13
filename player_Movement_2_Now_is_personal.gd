@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var SPEED = 5.0
 @export var camera: Camera3D
+@export var decel := 25.0
 var target_velocity= Vector3.ZERO
 # Moglichen "Sates"
 enum STATE {
@@ -11,21 +12,40 @@ enum STATE {
 	CROUCHED,
 	HIDING
 }
+var speed = SPEED
 
 var Current_State: STATE = STATE.IDLE
 
+func check_state():
+	#Die state ändern
+	var moving = (
+		Input.is_action_pressed("move_right")
+		or Input.is_action_pressed("move_left") 
+		or Input.is_action_pressed("move_back") 
+		or Input.is_action_pressed("move_forward")
+	)
+	
+	if Input.is_action_pressed("crouching"):
+		Current_State = STATE.CROUCHED
+	elif moving and Input.is_action_pressed("running"):
+		Current_State = STATE.RUNNING
+	elif moving:
+		Current_State = STATE.WALKING
+	
+	else:
+		Current_State = STATE.IDLE
+
 func _physics_process(delta: float) -> void:
+	# update state every tick
+	check_state()
+	
 	match Current_State:
 		STATE.IDLE:
 			#Die charakter Beweg sich nicht
 			velocity.x= 0
 			velocity.z= 0
-			#Die state ändern
-			if Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_back") or Input.is_action_pressed("move_forward"):
-				Current_State = STATE.WALKING
-				print("state change walking")
 			
-		STATE.WALKING:
+		STATE.WALKING, STATE.RUNNING, STATE.CROUCHED:
 			#Code für die character Bewegung
 			var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 			var input_vector := Vector3(input_dir.x, 0, input_dir.y)
@@ -33,21 +53,20 @@ func _physics_process(delta: float) -> void:
 			direction.y = 0
 			direction = direction.normalized()
 			
-			if input_vector.length() > 0.0:
-				velocity.x = direction.x * SPEED
-				velocity.z = direction.z * SPEED
-			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
-				velocity.z = move_toward(velocity.z, 0, SPEED)
+			speed = SPEED
 			
-			# ich hab mal die lange "if" schlange hier zerstört
-			if input_dir.length() == 0.0:
-				Current_State=STATE.IDLE
-				print("state change idle")
-		STATE.RUNNING:
-			pass
-		STATE.CROUCHED:
-			pass
+			if Current_State == STATE.RUNNING:
+				speed *= 1.5
+			elif Current_State == STATE.CROUCHED:
+				speed *= 0.6
+			
+			if input_vector.length() > 0.0:
+				velocity.x = direction.x * speed
+				velocity.z = direction.z * speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, decel * delta)
+				velocity.z = move_toward(velocity.z, 0, decel * delta)
+			
 		STATE.HIDING:
 			pass
 	#velocity = target_velocity// Das muss hier bleiben, nicht anfassen

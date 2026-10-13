@@ -6,14 +6,14 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_pekrf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_u35ib"]
 
 [node name="liftObject" type="RigidBody3D" unique_id=1355792475]
 physics_material_override = SubResource("PhysicsMaterial_2lrcr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1316769840]
-material_override = ExtResource("1_133d3")
 mesh = SubResource("BoxMesh_pekrf")
+surface_material_override/0 = ExtResource("1_133d3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1900140887]
-shape = SubResource("BoxShape3D_jka67")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=916907045]
+shape = SubResource("BoxShape3D_u35ib")

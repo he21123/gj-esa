@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://danmh8luuh0qt" path="res://Scripts/player_Movement_2_Now_is_personal.gd" id="1_kpjcp"]
 [ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://Scripts/playerCam.gd" id="2_af68g"]
 [ext_resource type="Script" uid="uid://c22tp3mftva12" path="res://Scripts/pickup.gd" id="3_af68g"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ggrg3"]
+[ext_resource type="Script" uid="uid://dadltomubmhp3" path="res://Szenen/hide_point.gd" id="4_3mm40"]
+[ext_resource type="Texture2D" uid="uid://c6467sbtf7f7n" path="res://UI_Assets/hide_vignette.png" id="5_3mm40"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cxr5p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e80uo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pekrf"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1649294839 node_paths=PackedStringArray("camera")]
 collision_layer = 0
@@ -24,16 +26,17 @@ collision_mask = 4
 transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1.1, 0, -0.33842742, 0)
 shape = SubResource("SphereShape3D_ggrg3")
 debug_color = Color(0.9897552, 0, 0.2921896, 0.41960785)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1464491796]
 mesh = SubResource("CapsuleMesh_cxr5p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1987527634]
 shape = SubResource("CapsuleShape3D_e80uo")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=620389596]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=620389596 node_paths=PackedStringArray("collision_shape")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_af68g")
+collision_shape = NodePath("../CollisionShape3D")
+headroom = 1.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1594203226]
 spot_attenuation = -0.56
@@ -50,5 +53,30 @@ hold_point = NodePath("../Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="Camera3D" unique_id=815748724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="HidePoint" type="Marker3D" parent="Camera3D" unique_id=526045785 node_paths=PackedStringArray("vignette")]
+script = ExtResource("4_3mm40")
+vignette = NodePath("CanvasLayer/Control/TextureRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D/HidePoint" unique_id=1634743119]
+
+[node name="Control" type="Control" parent="Camera3D/HidePoint/CanvasLayer" unique_id=672732798]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Camera3D/HidePoint/CanvasLayer/Control" unique_id=2108222212]
+z_index = -1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_3mm40")
+
+[node name="Detector" type="Area3D" parent="Camera3D/HidePoint" unique_id=494132323]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/HidePoint/Detector" unique_id=1108024830]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("SphereShape3D_pekrf")
 
 [connection signal="body_entered" from="DameArea" to="." method="_on_dame_area_body_entered"]

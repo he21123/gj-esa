@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_335ap"]
 [ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://Szenen/character_preset.tscn" id="5_8eut2"]
 [ext_resource type="PackedScene" uid="uid://b8g5wvsfv5hdd" path="res://UI.tscn" id="6_g5wax"]
+[ext_resource type="PackedScene" uid="uid://mwh8lapgd8do" path="res://Szenen/hide_area.tscn" id="7_prsgj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
 
@@ -46,23 +47,6 @@ light_energy = 16.0
 light_volumetric_fog_energy = 0.0
 spot_range = 7.228477
 
-[node name="UI" type="SubViewportContainer" parent="." unique_id=465995956]
-offset_right = 182.0
-offset_bottom = 96.0
-
-[node name="Objective" type="SubViewport" parent="UI" unique_id=1478293263]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Label" type="Label" parent="UI/Objective" unique_id=1746348245]
-offset_left = 35.0
-offset_top = 35.0
-offset_right = 89.999985
-offset_bottom = 58.000004
-script = ExtResource("3_by8nx")
-steps = 50.0
-
 [node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("4_335ap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 0.5, -0.8)
 collision_layer = 3
@@ -74,3 +58,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 1.1367846, 0)
 player = NodePath("../Player")
 
 [node name="CanvasLayer" parent="." unique_id=806493726 instance=ExtResource("6_g5wax")]
+
+[node name="hideArea" parent="." unique_id=1250555072 instance=ExtResource("7_prsgj")]
+transform = Transform3D(5.3856, 0, 0, 0, 1.1325599, 0, 0, 0, 0.99, 0, 0, 2.9)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=294705426]
+transform = Transform3D(5.3900003, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 2.9240372)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+size = Vector3(1, 0.2, 1)
+
+[node name="Objective" type="CanvasLayer" parent="." unique_id=1380750518]
+
+[node name="Label" type="Label" parent="Objective" unique_id=493361995]
+offset_left = 35.0
+offset_top = 35.0
+offset_right = 89.999985
+offset_bottom = 58.000004
+script = ExtResource("3_by8nx")
+steps = 50.0

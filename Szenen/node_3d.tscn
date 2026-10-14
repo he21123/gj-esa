@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://cf81qrvlmvia8"]
 
-[ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Player.tscn" id="1_i5arm"]
-[ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="3_a0tk4"]
-[ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://lift_object.tscn" id="5_i5arm"]
-[ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Objective.gd" id="5_jka67"]
-[ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://character_preset.tscn" id="5_wc5p8"]
+[ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="1_pp4yc"]
+[ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="2_prsgj"]
+[ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="3_by8nx"]
+[ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_335ap"]
+[ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://Szenen/character_preset.tscn" id="5_8eut2"]
+[ext_resource type="PackedScene" uid="uid://b8g5wvsfv5hdd" path="res://UI.tscn" id="6_g5wax"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
 
@@ -17,18 +18,23 @@ rough = true
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 1.4, -2.1)
-material_override = ExtResource("3_a0tk4")
+material_override = ExtResource("1_pp4yc")
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 mesh = SubResource("BoxMesh_u35ib")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
 transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
-material_override = ExtResource("3_a0tk4")
+material_override = ExtResource("1_pp4yc")
 use_collision = true
+collision_layer = 2
+collision_mask = 3
 mesh = SubResource("BoxMesh_pekrf")
 
-[node name="Player" parent="." unique_id=1649294839 instance=ExtResource("1_i5arm")]
+[node name="Player" parent="." unique_id=1649294839 instance=ExtResource("2_prsgj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74863744, 0)
+collision_mask = 2
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=228057075]
 transform = Transform3D(1, 0, 0, 0, 0.030428912, 0.99953693, 0, -0.99953693, 0.030428912, -1.1899672, 1.6029043, 0.6909137)
@@ -51,13 +57,17 @@ offset_left = 35.0
 offset_top = 35.0
 offset_right = 89.999985
 offset_bottom = 58.000004
-script = ExtResource("5_jka67")
+script = ExtResource("3_by8nx")
 steps = 50.0
 
-[node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("5_i5arm")]
+[node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("4_335ap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 0.5, -0.8)
+collision_layer = 3
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_133d3")
 
-[node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_wc5p8")]
+[node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_8eut2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 1.1367846, 0)
 player = NodePath("../Player")
+
+[node name="CanvasLayer" parent="." unique_id=806493726 instance=ExtResource("6_g5wax")]

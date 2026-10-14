@@ -20,6 +20,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Main_Vignette" type="TextureRect" parent="Control" unique_id=38363137]
 modulate = Color(1, 1, 1, 0.62352943)
@@ -35,6 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_g6l6n")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Vignette_Damage_1" type="TextureRect" parent="Control" unique_id=927168526]
 visible = false
@@ -69,6 +71,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 texture = ExtResource("1_b3bc3")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Control" unique_id=1758567733]
 visible = false

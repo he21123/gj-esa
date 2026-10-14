@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://mwh8lapgd8do"]
+
+[ext_resource type="Script" uid="uid://bwgp5yfgrldef" path="res://Szenen/hide_area.gd" id="1_3yllw"]
+[ext_resource type="Script" uid="uid://pejucbtfsiwm" path="res://Szenen/Area3D.gd" id="1_helds"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vpng8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prsgj"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
+
+[node name="Area3D" type="Area3D" unique_id=1551783368]
+script = ExtResource("1_helds")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=361497118]
+shape = SubResource("BoxShape3D_vpng8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=675748217]
+material_override = SubResource("StandardMaterial3D_prsgj")
+transparency = 0.8
+mesh = SubResource("BoxMesh_u35ib")
+script = ExtResource("1_3yllw")

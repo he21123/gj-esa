@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://dadltomubmhp3" path="res://Szenen/hide_point.gd" id="4_3mm40"]
 [ext_resource type="Texture2D" uid="uid://c6467sbtf7f7n" path="res://UI_Assets/hide_vignette.png" id="5_3mm40"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ggrg3"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cxr5p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e80uo"]
@@ -23,9 +25,10 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DameArea" unique_id=956502175]
-transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1.1, 0, -0.33842742, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.33842742, 0)
 shape = SubResource("SphereShape3D_ggrg3")
 debug_color = Color(0.9897552, 0, 0.2921896, 0.41960785)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1464491796]
 mesh = SubResource("CapsuleMesh_cxr5p")
 

@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	if GameState.ActualHP !=3:
 		visible=true
 		var puls = sin(Time.get_ticks_msec() * 0.005) * 0.5 + 0.5
-		var base_intensity = 1.0 - (GameState.ActualHP / GameState.MaxHP)
+		var base_intensity = 1.0 - (float(GameState.ActualHP) / GameState.MaxHP)
 		modulate.a = base_intensity * (0.7 + 0.3 * puls)
 		Veins.modulate.a = base_intensity * (0.7 + 0.3 * puls)
 		if GameState.ActualHP !=2:

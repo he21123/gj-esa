@@ -17,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 		if zone.overlaps_area(detector):
 			inside = true
 			break
-	print("zones: ", get_tree().get_nodes_in_group("zones").size(), " inside: ", inside)
+
 	
 func _process(delta: float) -> void:
 	var target = 1.0 if inside else 0.0

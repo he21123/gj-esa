@@ -65,7 +65,7 @@ transform = Transform3D(5.3856, 0, 0, 0, 1.1325599, 0, 0, 0, 0.99, 0, 0, 2.9)
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=294705426]
 transform = Transform3D(5.3900003, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 2.9240372)
 use_collision = true
-collision_layer = 7
+collision_layer = 2
 collision_mask = 7
 size = Vector3(1, 0.2, 1)
 

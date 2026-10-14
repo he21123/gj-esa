@@ -10,6 +10,8 @@ shading_mode = 0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pekrf"]
 
 [node name="CharacterPreset" type="CharacterBody3D" unique_id=454946596]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_ojt3y")
 
 [node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=78831983]

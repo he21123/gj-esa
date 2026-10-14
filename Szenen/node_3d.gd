@@ -13,6 +13,6 @@ func _process(delta: float) -> void:
 	pass
 	
 func on_dead():
-	get_tree().change_scene_to_file("res://Szenen/node_3d.tscn")
-	GameState.ActualHP=GameState.MaxHP
+	GameState.ActualHP = GameState.MaxHP
+	get_tree().call_deferred("change_scene_to_file", "res://Szenen/node_3d.tscn")
 	

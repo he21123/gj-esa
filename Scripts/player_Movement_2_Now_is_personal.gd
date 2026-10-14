@@ -47,6 +47,9 @@ func _physics_process(delta: float) -> void:
 			
 		STATE.WALKING, STATE.RUNNING, STATE.CROUCHED:
 			#Code für die character Bewegung
+			if not is_on_floor():
+				velocity += get_gravity() * delta
+				
 			var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 			var input_vector := Vector3(input_dir.x, 0, input_dir.y)
 			var direction := camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)
@@ -59,6 +62,7 @@ func _physics_process(delta: float) -> void:
 				speed *= 1.5
 			elif Current_State == STATE.CROUCHED:
 				speed *= 0.6
+				print(GameState.ActualHP)
 			
 			if input_vector.length() > 0.0:
 				velocity.x = direction.x * speed
@@ -71,3 +75,8 @@ func _physics_process(delta: float) -> void:
 			pass
 	#velocity = target_velocity// Das muss hier bleiben, nicht anfassen
 	move_and_slide()
+	
+
+func _on_dame_area_body_entered(body: Node3D) -> void:
+	GameState.take_damage()
+	

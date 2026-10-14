@@ -3,6 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://c74vjjpxxbrhv" path="res://Titelloses_116_20261013211026.png" id="1_b3bc3"]
 [ext_resource type="Texture2D" uid="uid://d2gla0c1k1e61" path="res://UI_Assets/Neues Projekt.png" id="1_g6l6n"]
 [ext_resource type="Texture2D" uid="uid://7tugamqvsj5c" path="res://UI_Assets/Blood_Blur_1.png" id="2_3b2b5"]
+[ext_resource type="Texture2D" uid="uid://bexbnarjx76e8" path="res://UI_Assets/Veins_1.png" id="2_qui0h"]
+[ext_resource type="Script" uid="uid://7nb50t8agvlx" path="res://vignette_damage_1.gd" id="3_qui0h"]
+[ext_resource type="Texture2D" uid="uid://dqndmeoyorcvx" path="res://UI_Assets/Effect_4.png" id="5_0mc3e"]
+[ext_resource type="Texture2D" uid="uid://cf4owrca55nyd" path="res://UI_Assets/Blood_Drops.png" id="6_27c8x"]
+[ext_resource type="Texture2D" uid="uid://xhf7bpbfhsr0" path="res://UI_Assets/Solid_Drip_1.png" id="7_i1vam"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=806493726]
 
@@ -36,19 +41,57 @@ grow_vertical = 2
 texture = ExtResource("1_g6l6n")
 expand_mode = 1
 
-[node name="Vignette_Damage_1" type="TextureRect" parent="Control" unique_id=927168526]
-visible = false
+[node name="vignette_Bloodt" type="TextureRect" parent="Control" unique_id=1112020506 node_paths=PackedStringArray("Veins", "Flash1", "Flash2", "Flash3")]
+layout_mode = 0
+offset_left = -556.0
+offset_top = -370.0
+offset_right = 603.0
+offset_bottom = 392.0
+texture = ExtResource("2_3b2b5")
+expand_mode = 1
+script = ExtResource("3_qui0h")
+Veins = NodePath("Vignette_Vines")
+Flash1 = NodePath("Flash_1")
+Flash2 = NodePath("Flash_2")
+Flash3 = NodePath("Flash_3")
+
+[node name="Vignette_Vines" type="TextureRect" parent="Control/vignette_Bloodt" unique_id=927168526]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -556.0
-offset_top = -307.0
-offset_right = 556.0
-offset_bottom = 305.0
+offset_left = -172.0
+offset_top = -69.0
+offset_right = 894.0
+offset_bottom = 222.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_3b2b5")
+texture = ExtResource("2_qui0h")
+expand_mode = 1
+
+[node name="Flash_1" type="TextureRect" parent="Control/vignette_Bloodt" unique_id=647629201]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 1155.0
+offset_bottom = 717.0
+texture = ExtResource("5_0mc3e")
+expand_mode = 1
+
+[node name="Flash_2" type="TextureRect" parent="Control/vignette_Bloodt" unique_id=509111248]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 214.0
+offset_right = 1033.0
+offset_bottom = 664.0
+texture = ExtResource("6_27c8x")
+expand_mode = 1
+
+[node name="Flash_3" type="TextureRect" parent="Control/vignette_Bloodt" unique_id=1196484968]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 1155.0
+offset_bottom = 843.0
+texture = ExtResource("7_i1vam")
 expand_mode = 1
 
 [node name="Point" type="TextureRect" parent="Control" unique_id=17258340]

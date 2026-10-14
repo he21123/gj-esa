@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cf81qrvlmvia8"]
 
 [ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="1_pp4yc"]
+[ext_resource type="Script" uid="uid://dphoivhopdqab" path="res://Szenen/node_3d.gd" id="1_prsgj"]
 [ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="2_prsgj"]
 [ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="3_by8nx"]
 [ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_335ap"]
@@ -15,12 +16,13 @@
 rough = true
 
 [node name="Node3D" type="Node3D" unique_id=390946995]
+script = ExtResource("1_prsgj")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 1.4, -2.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 0.39999998, -2.1)
 material_override = ExtResource("1_pp4yc")
 use_collision = true
-collision_layer = 2
+collision_layer = 4
 collision_mask = 3
 mesh = SubResource("BoxMesh_u35ib")
 
@@ -33,8 +35,9 @@ collision_mask = 3
 mesh = SubResource("BoxMesh_pekrf")
 
 [node name="Player" parent="." unique_id=1649294839 instance=ExtResource("2_prsgj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74863744, 0)
-collision_mask = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45019197, 0)
+collision_layer = 1
+collision_mask = 6
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=228057075]
 transform = Transform3D(1, 0, 0, 0, 0.030428912, 0.99953693, 0, -0.99953693, 0.030428912, -1.1899672, 1.6029043, 0.6909137)
@@ -63,7 +66,7 @@ steps = 50.0
 [node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("4_335ap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 0.5, -0.8)
 collision_layer = 3
-collision_mask = 3
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_133d3")
 
 [node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_8eut2")]

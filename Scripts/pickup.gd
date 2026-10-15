@@ -6,11 +6,17 @@ var held_obj: RigidBody3D = null
 var high_obj: RigidBody3D = null
 var og_albedo: Color
 var high_mat: ShaderMaterial
+var reset_tween: Tween
 
 @export var PULL_STRENGTH: float
 @export var PULL_DAMP: float
 @export var MAX_ACCEL: float
 @export var hold_point: Marker3D
+@export var bar: TextureProgressBar
+@export var fillspeed: float = 5
+@export var min_throw_speed: float = 5.0
+@export var max_throw_speed: float = 30.0
+
 
 var prev_hold_pos: Vector3
 var hold_point_vel: Vector3 = Vector3.ZERO
@@ -47,6 +53,7 @@ func set_high(obj: RigidBody3D):
 func _ready() -> void:
 	add_exception(get_parent().get_parent())
 	prev_hold_pos = hold_point.global_position
+	bar.visible = false
 
 func _physics_process(delta: float) -> void:
 	
@@ -61,11 +68,35 @@ func _physics_process(delta: float) -> void:
 			selected_obj = hit_obj
 	
 	if Input.is_action_just_pressed("pickup"):
+		if reset_tween:
+			reset_tween.kill()
 		if held_obj == null and selected_obj != null:
 			held_obj = selected_obj
 		elif held_obj:
 			held_obj.sleeping = false
 			held_obj = null
+			_reset_bar()
+			
+			
+	if Input.is_action_just_pressed("throw") and held_obj:
+		bar.value = bar.min_value
+		bar.visible = true
+	
+	if Input.is_action_pressed("throw") and held_obj:
+		bar.value = min(bar.value + fillspeed * delta, bar.max_value)
+	
+	if Input.is_action_just_released("throw") and held_obj:
+		var charge: float = inverse_lerp(bar.min_value, bar.max_value, bar.value)
+		var speed: float = lerp(min_throw_speed, max_throw_speed, charge)
+		var dir: Vector3 = -global_transform.basis.z
+		
+		var thrown := held_obj
+		held_obj = null
+		thrown.sleeping = false
+		thrown.linear_velocity = dir * speed
+		_reset_bar()
+		
+		
 	
 	if held_obj != null:
 		if not is_instance_valid(held_obj):
@@ -86,4 +117,13 @@ func _physics_process(delta: float) -> void:
 	
 	if selected_obj != high_obj:
 		set_high(selected_obj)
-		
+
+func _reset_bar():
+	if reset_tween:
+		reset_tween.kill()
+
+	reset_tween = create_tween()
+	reset_tween.tween_property(bar, "value", bar.min_value, 0.25) \
+		.set_trans(Tween.TRANS_QUAD) \
+		.set_ease(Tween.EASE_OUT)
+	reset_tween.tween_callback(func(): bar.visible = false)

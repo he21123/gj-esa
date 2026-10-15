@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://c22tp3mftva12" path="res://Scripts/pickup.gd" id="3_af68g"]
 [ext_resource type="Script" uid="uid://dadltomubmhp3" path="res://Szenen/hide_point.gd" id="4_3mm40"]
 [ext_resource type="Texture2D" uid="uid://c6467sbtf7f7n" path="res://UI_Assets/hide_vignette.png" id="5_3mm40"]
+[ext_resource type="Texture2D" uid="uid://y7f2dnb5ar6r" path="res://Assets_2d/empty.png" id="6_y4n7y"]
+[ext_resource type="Texture2D" uid="uid://n2a5qf70q43o" path="res://Assets_2d/full.png" id="7_mpr15"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ggrg3"]
 
@@ -44,7 +46,7 @@ headroom = 1.0
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1594203226]
 spot_attenuation = -0.56
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=172756908 node_paths=PackedStringArray("hold_point")]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=172756908 node_paths=PackedStringArray("hold_point", "bar")]
 target_position = Vector3(0, 0, -2.4)
 hit_back_faces = false
 debug_shape_thickness = 4
@@ -53,6 +55,10 @@ PULL_STRENGTH = 25.0
 PULL_DAMP = 10.0
 MAX_ACCEL = 80.0
 hold_point = NodePath("../Marker3D")
+bar = NodePath("../HidePoint/CanvasLayer/Control/TextureProgressBar")
+fillspeed = 50.0
+min_throw_speed = 3.0
+max_throw_speed = 8.0
 
 [node name="Marker3D" type="Marker3D" parent="Camera3D" unique_id=815748724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
@@ -72,9 +78,26 @@ offset_bottom = 40.0
 [node name="TextureRect" type="TextureRect" parent="Camera3D/HidePoint/CanvasLayer/Control" unique_id=2108222212]
 z_index = -1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
 texture = ExtResource("5_3mm40")
+expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera3D/HidePoint/CanvasLayer/Control" unique_id=121755375]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 28.800001
+anchor_bottom = 16.0
+offset_left = 549.0
+offset_top = 296.0
+offset_right = -547.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.0
+fill_mode = 4
+texture_under = ExtResource("6_y4n7y")
+texture_progress = ExtResource("7_mpr15")
 
 [node name="Detector" type="Area3D" parent="Camera3D/HidePoint" unique_id=494132323]
 

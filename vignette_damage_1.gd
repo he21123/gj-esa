@@ -28,12 +28,14 @@ func _process(delta: float) -> void:
 	else:
 		visible= false
 		
-	Flash1.modulate.a= lerp(Flash1.modulate.a, 0.0 , delta * 3.0)
-	Flash2.modulate.a= lerp(Flash2.modulate.a, 0.0 , delta * 3.0)
-	Flash3.modulate.a= lerp(Flash3.modulate.a, 0.0 , delta * 3.0)
+	if GameState.ActualHP<=0:
+		Flash1.modulate.a= lerp(Flash1.modulate.a, 0.0 , delta * 3.0)
+		Flash2.modulate.a= lerp(Flash2.modulate.a, 0.0 , delta * 3.0)
+		Flash3.modulate.a= lerp(Flash3.modulate.a, 0.0 , delta * 3.0)
 func on_lose_life():
-	Flash1.modulate.a= 1.0
-	Flash2.modulate.a= 1.0
-	Flash3.modulate.a= 1.0
+	if GameState.ActualHP<=0:
+		Flash1.modulate.a= 1.0
+		Flash2.modulate.a= 1.0
+		Flash3.modulate.a= 1.0
 	
 	print("lose life")

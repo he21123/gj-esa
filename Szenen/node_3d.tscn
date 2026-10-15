@@ -1,41 +1,51 @@
 [gd_scene format=3 uid="uid://cf81qrvlmvia8"]
 
-[ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="1_pp4yc"]
-[ext_resource type="Script" uid="uid://dphoivhopdqab" path="res://Szenen/node_3d.gd" id="1_prsgj"]
-[ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="2_prsgj"]
-[ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="3_by8nx"]
-[ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_335ap"]
-[ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://Szenen/character_preset.tscn" id="5_8eut2"]
-[ext_resource type="PackedScene" uid="uid://b8g5wvsfv5hdd" path="res://UI.tscn" id="6_g5wax"]
-[ext_resource type="PackedScene" uid="uid://mwh8lapgd8do" path="res://Szenen/hide_area.tscn" id="7_prsgj"]
+[ext_resource type="Script" uid="uid://dphoivhopdqab" path="res://Szenen/node_3d.gd" id="1_n8wve"]
+[ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="2_w6nrp"]
+[ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="3_ytq6r"]
+[ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_d24jv"]
+[ext_resource type="PackedScene" uid="uid://c6t8lbmtsfmjx" path="res://Szenen/character_preset.tscn" id="5_jbnew"]
+[ext_resource type="PackedScene" uid="uid://b8g5wvsfv5hdd" path="res://UI.tscn" id="6_7sr5w"]
+[ext_resource type="PackedScene" uid="uid://mwh8lapgd8do" path="res://Szenen/hide_area.tscn" id="7_lum60"]
+[ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="8_dpex8"]
+[ext_resource type="PackedScene" uid="uid://bkp60mftm23yc" path="res://Szenen/enemie.tscn" id="9_vgwgj"]
+
+[sub_resource type="Environment" id="Environment_ggrg3"]
+background_mode = 1
+background_color = Color(1, 0.9764706, 0.84313726, 1)
+ambient_light_color = Color(0.70796657, 0.7079665, 0.7079665, 1)
+fog_enabled = true
+fog_light_color = Color(1, 0.972549, 0.8627451, 1)
+fog_light_energy = 0.68
+fog_density = 0.15
 
 [sub_resource type="BoxMesh" id="BoxMesh_u35ib"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_pekrf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_133d3"]
 rough = true
 
-[node name="Node3D" type="Node3D" unique_id=390946995]
-script = ExtResource("1_prsgj")
+[sub_resource type="NavigationMesh" id="NavigationMesh_ggrg3"]
+vertices = PackedVector3Array(-11.652546, 0, -11.218936, -11.652546, 0, 11.281064, 11.597454, 0, 11.281064, 11.597454, 0, -11.218936)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1368979775]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3995459, 0.39999998, -2.1)
-material_override = ExtResource("1_pp4yc")
+[sub_resource type="BoxMesh" id="BoxMesh_pekrf"]
+
+[node name="Node3D" type="Node3D" unique_id=390946995 node_paths=PackedStringArray("player")]
+script = ExtResource("1_n8wve")
+player = NodePath("Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1586582838]
+environment = SubResource("Environment_ggrg3")
+
+[node name="Enemy" type="CSGMesh3D" parent="." unique_id=1368979775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.219216, 0.39999998, -10.551489)
+material_override = ExtResource("2_w6nrp")
 use_collision = true
 collision_layer = 4
 collision_mask = 3
 mesh = SubResource("BoxMesh_u35ib")
 
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="." unique_id=1116909109]
-transform = Transform3D(10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, -0.75, 0)
-material_override = ExtResource("1_pp4yc")
-use_collision = true
-collision_layer = 2
-collision_mask = 3
-mesh = SubResource("BoxMesh_pekrf")
-
-[node name="Player" parent="." unique_id=1649294839 instance=ExtResource("2_prsgj")]
+[node name="Player" parent="." unique_id=1649294839 instance=ExtResource("3_ytq6r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45019197, 0)
 collision_layer = 1
 collision_mask = 6
@@ -47,23 +57,23 @@ light_energy = 16.0
 light_volumetric_fog_energy = 0.0
 spot_range = 7.228477
 
-[node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("4_335ap")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6000001, 0.5, -0.8)
+[node name="liftObject" parent="." unique_id=1355792475 instance=ExtResource("4_d24jv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.73221, 0.5, -10.673862)
 collision_layer = 3
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_133d3")
 
-[node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_8eut2")]
+[node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_jbnew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 1.1367846, 0)
 player = NodePath("../Player")
 
-[node name="CanvasLayer" parent="." unique_id=806493726 instance=ExtResource("6_g5wax")]
+[node name="CanvasLayer" parent="." unique_id=806493726 instance=ExtResource("6_7sr5w")]
 
-[node name="hideArea" parent="." unique_id=1250555072 instance=ExtResource("7_prsgj")]
-transform = Transform3D(5.3856, 0, 0, 0, 1.1325599, 0, 0, 0, 0.99, 0, 0, 2.9)
+[node name="hideArea" parent="." unique_id=1250555072 instance=ExtResource("7_lum60")]
+transform = Transform3D(5.3856, 0, 0, 0, 1.1325599, 0, 0, 0, 0.99, 8.681068, 0, 9.862444)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=294705426]
-transform = Transform3D(5.3900003, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70000005, 2.9240372)
+transform = Transform3D(5.3900003, 0, 0, 0, 1, 0, 0, 0, 1, 8.681068, 0.70000005, 9.886481)
 use_collision = true
 collision_layer = 2
 collision_mask = 7
@@ -76,5 +86,20 @@ offset_left = 35.0
 offset_top = 35.0
 offset_right = 89.999985
 offset_bottom = 58.000004
-script = ExtResource("3_by8nx")
+script = ExtResource("8_dpex8")
 steps = 50.0
+
+[node name="Enemie" parent="." unique_id=240428950 node_paths=PackedStringArray("player") instance=ExtResource("9_vgwgj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -9)
+player = NodePath("../Player")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2046118169]
+navigation_mesh = SubResource("NavigationMesh_ggrg3")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="NavigationRegion3D" unique_id=1116909109]
+transform = Transform3D(24.305092, 0, 0, 0, 0.5, 0, 0, 0, 23.437872, 0, -0.75, 0)
+material_override = ExtResource("2_w6nrp")
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+mesh = SubResource("BoxMesh_pekrf")

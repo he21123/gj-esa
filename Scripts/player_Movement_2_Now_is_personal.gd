@@ -77,6 +77,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 
-func _on_dame_area_body_entered(body: Node3D) -> void:
+func _on_dame_area_body_entered(_body: Node3D) -> void:
 	GameState.take_damage()
 	

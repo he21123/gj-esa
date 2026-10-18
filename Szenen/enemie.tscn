@@ -2,26 +2,20 @@
 
 [ext_resource type="Script" uid="uid://dnhexqek2h76o" path="res://Szenen/enemie.gd" id="1_o08ct"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4rca"]
-shading_mode = 0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6nsn"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_us4bd"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_w6nrp"]
+[sub_resource type="QuadMesh" id="QuadMesh_m2pct"]
 
 [node name="Enemy" type="CharacterBody3D" unique_id=240428950 groups=["Enemies"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_o08ct")
 
-[node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=490246141]
-transform = Transform3D(2.2273188, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_n4rca")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_us4bd")
-
-[node name="CharacterCollider" type="CollisionShape3D" parent="." unique_id=783577913]
-transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -0.0053710938, 0)
-shape = SubResource("CylinderShape3D_w6nrp")
-
 [node name="Nav" type="NavigationAgent3D" parent="." unique_id=2093797176]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=713108396]
+shape = SubResource("CapsuleShape3D_l6nsn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2121346707]
+transform = Transform3D(1, 0, 0, 0, 2.1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_m2pct")

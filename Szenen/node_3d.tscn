@@ -90,8 +90,10 @@ script = ExtResource("8_dpex8")
 steps = 50.0
 
 [node name="Enemie" parent="." unique_id=240428950 node_paths=PackedStringArray("player") instance=ExtResource("9_vgwgj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -10.860424)
 player = NodePath("../Player")
+Position_Out = Vector3(-9, 0, -10.86)
+Position_In = Vector3(-9, 0, -10.86)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2046118169]
 navigation_mesh = SubResource("NavigationMesh_ggrg3")
@@ -103,3 +105,5 @@ use_collision = true
 collision_layer = 2
 collision_mask = 3
 mesh = SubResource("BoxMesh_pekrf")
+
+[connection signal="body_entered" from="hideArea" to="Enemie" method="_on_hide_area_body_entered"]

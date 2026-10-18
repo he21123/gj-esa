@@ -19,3 +19,5 @@ shape = SubResource("CapsuleShape3D_l6nsn")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2121346707]
 transform = Transform3D(1, 0, 0, 0, 2.1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("QuadMesh_m2pct")
+
+[node name="Timer" type="Timer" parent="." unique_id=815283096]

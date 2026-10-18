@@ -2,7 +2,6 @@ extends Marker3D
 
 @export var vignette: TextureRect
 @export var fade_speed: float = 1.2
-
 @onready var detector: Area3D = $Detector
 
 var inside: bool = false

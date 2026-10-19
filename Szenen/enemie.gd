@@ -54,8 +54,6 @@ func _physics_process(_delta: float) -> void:
 				Wait_time.start()
 				
 
-#func _update_target_location(target_location):
-	#Nav_agent.set_target_location(target_location)
 func  _go_to(objective:Vector3):
 	Nav_agent.set_target_position(objective)
 	if Nav_agent. is_navigation_finished():

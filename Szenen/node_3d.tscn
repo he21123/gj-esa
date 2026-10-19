@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mwh8lapgd8do" path="res://Szenen/hide_area.tscn" id="7_lum60"]
 [ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="8_dpex8"]
 [ext_resource type="PackedScene" uid="uid://bkp60mftm23yc" path="res://Szenen/enemie.tscn" id="9_vgwgj"]
+[ext_resource type="Script" path="res://Scripts/ChaseTimer.gd" id="10_chst"]
 
 [sub_resource type="Environment" id="Environment_ggrg3"]
 background_mode = 1
@@ -89,6 +90,15 @@ offset_bottom = 58.000004
 script = ExtResource("8_dpex8")
 steps = 50.0
 
+[node name="ChaseTimer" type="Label" parent="Objective" node_paths=PackedStringArray("enemy")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 58.0
+horizontal_alignment = 1
+script = ExtResource("10_chst")
+enemy = NodePath("../../Enemie")
+
 [node name="Enemie" parent="." unique_id=240428950 node_paths=PackedStringArray("player") instance=ExtResource("9_vgwgj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -10.860424)
 player = NodePath("../Player")
@@ -105,5 +115,3 @@ use_collision = true
 collision_layer = 2
 collision_mask = 3
 mesh = SubResource("BoxMesh_pekrf")
-
-[connection signal="body_entered" from="hideArea" to="Enemie" method="_on_hide_area_body_entered"]

@@ -15,6 +15,15 @@ enum STATE {
 var speed = SPEED
 
 var Current_State: STATE = STATE.IDLE
+var frozen: bool = false
+
+func _enemy_start_chase(enemy: Node3D) -> void:
+	frozen = true
+	camera.startle(enemy)
+
+func _enemy_chase_over() -> void:
+	frozen = false
+	camera.unstartle()
 
 func check_state():
 	#Die state ändern
@@ -25,7 +34,9 @@ func check_state():
 		or Input.is_action_pressed("move_forward")
 	)
 	
-	if Input.is_action_pressed("crouching"):
+	if frozen:
+		Current_State = STATE.IDLE
+	elif Input.is_action_pressed("crouching"):
 		Current_State = STATE.CROUCHED
 	elif moving and Input.is_action_pressed("running"):
 		Current_State = STATE.RUNNING

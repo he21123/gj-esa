@@ -17,6 +17,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_pekrf"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1649294839 node_paths=PackedStringArray("camera") groups=["Player"]]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_kpjcp")

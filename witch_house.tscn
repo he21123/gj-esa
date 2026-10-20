@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cluwj3i1mx6sf"]
+
+[node name="Node3D" type="Node3D" unique_id=418757688]
+
+[node name="house" type="CSGBox3D" parent="." unique_id=1219126503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.6000004)
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+size = Vector3(15, 0.5, 15)
+
+[node name="wall" type="CSGBox3D" parent="house" unique_id=574510124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -7.25)
+size = Vector3(15, 5, 0.5)
+
+[node name="wall" type="CSGBox3D" parent="house/wall" unique_id=1904828202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1.55, 0)
+operation = 2
+size = Vector3(1.2, 1.9, 0.5)
+
+[node name="wall2" type="CSGBox3D" parent="house" unique_id=1387945793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 7.25)
+size = Vector3(15, 5, 0.5)
+
+[node name="wall3" type="CSGBox3D" parent="house" unique_id=2065911201]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.25, 2.75, 0)
+size = Vector3(15, 5, 0.5)
+
+[node name="wall4" type="CSGBox3D" parent="house" unique_id=906831422]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.25, 2.75, 0)
+size = Vector3(15, 5, 0.5)
+
+[node name="door_cutout" type="CSGBox3D" parent="house" unique_id=304341463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 1.2, 7.25)
+operation = 2
+size = Vector3(1.2, 1.9, 0.5)
+
+[node name="cellar" type="CSGBox3D" parent="." unique_id=1372497636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3, -6.15, 20.87)
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+size = Vector3(15, 0.5, 7.5)
+
+[node name="wall" type="CSGBox3D" parent="cellar" unique_id=2130541808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, -3.5500002)
+size = Vector3(15, 5, 0.5)
+
+[node name="door_cutout" type="CSGBox3D" parent="cellar/wall" unique_id=838969523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1.55, 0)
+operation = 2
+size = Vector3(1.2, 1.9, 0.5)
+
+[node name="wall2" type="CSGBox3D" parent="cellar" unique_id=2051801638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 3.75)
+size = Vector3(15, 5, 0.5)
+
+[node name="wall3" type="CSGBox3D" parent="cellar" unique_id=435876077]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.25, 2.75, 0.049999237)
+size = Vector3(7.5, 5, 0.5)
+
+[node name="wall4" type="CSGBox3D" parent="cellar" unique_id=1276375632]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.249999, 2.75, 0.049999237)
+size = Vector3(7.5, 5, 0.5)
+
+[node name="stairs" type="CSGBox3D" parent="." unique_id=1528614515]
+transform = Transform3D(1, 0, 0, 0, 0.8660253, -0.5, 0, 0.5, 0.8660253, -5.3, -3.506, 11.974904)
+use_collision = true
+collision_layer = 2
+collision_mask = 3
+size = Vector3(1.4, 1, 12.3)

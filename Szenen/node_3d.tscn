@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mwh8lapgd8do" path="res://Szenen/hide_area.tscn" id="7_lum60"]
 [ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="8_dpex8"]
 [ext_resource type="PackedScene" uid="uid://bkp60mftm23yc" path="res://Szenen/enemie.tscn" id="9_vgwgj"]
-[ext_resource type="Script" path="res://Scripts/ChaseTimer.gd" id="10_chst"]
+[ext_resource type="Script" uid="uid://dbwjs2qxdygal" path="res://Scripts/ChaseTimer.gd" id="10_chst"]
 
 [sub_resource type="Environment" id="Environment_ggrg3"]
 background_mode = 1
@@ -47,7 +47,7 @@ collision_mask = 3
 mesh = SubResource("BoxMesh_u35ib")
 
 [node name="Player" parent="." unique_id=1649294839 instance=ExtResource("3_ytq6r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45019197, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.45019197, 0)
 collision_layer = 1
 collision_mask = 6
 
@@ -65,7 +65,7 @@ collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_133d3")
 
 [node name="CharacterPreset" parent="." unique_id=454946596 node_paths=PackedStringArray("player") instance=ExtResource("5_jbnew")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 1.1367846, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.157812, 0.7367846, 0)
 player = NodePath("../Player")
 
 [node name="CanvasLayer" parent="." unique_id=806493726 instance=ExtResource("6_7sr5w")]
@@ -90,7 +90,7 @@ offset_bottom = 58.000004
 script = ExtResource("8_dpex8")
 steps = 50.0
 
-[node name="ChaseTimer" type="Label" parent="Objective" node_paths=PackedStringArray("enemy")]
+[node name="ChaseTimer" type="Label" parent="Objective" unique_id=289015742 node_paths=PackedStringArray("enemy")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 10.0

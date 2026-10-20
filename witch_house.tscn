@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://cluwj3i1mx6sf"]
 
-[ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="1_gwqi1"]
-
 [node name="Node3D" type="Node3D" unique_id=418757688]
 
 [node name="house" type="CSGBox3D" parent="." unique_id=1219126503]
@@ -71,6 +69,3 @@ use_collision = true
 collision_layer = 2
 collision_mask = 3
 size = Vector3(1.4, 1, 12.3)
-
-[node name="Player" parent="." unique_id=1649294839 instance=ExtResource("1_gwqi1")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.4395523, 3.185534, 0.6793518)

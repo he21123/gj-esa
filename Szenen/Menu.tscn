@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://7h1nbqxultt0" path="res://Scripts/NewGame.gd" id="4_wgfp4"]
 [ext_resource type="Script" uid="uid://bl778kufuxnnb" path="res://Scripts/Exit.gd" id="6_dbnuu"]
 [ext_resource type="AudioStream" uid="uid://51obu2av444e" path="res://SFX/text-blip-low.wav" id="7_2di0k"]
+[ext_resource type="AudioStream" uid="uid://ieykxi4brf2s" path="res://SFX/Night of the Streets.mp3" id="8_v4idy"]
 
 [node name="Control" type="Control" unique_id=2033432382]
 layout_mode = 3
@@ -82,3 +83,7 @@ vertical_icon_alignment = 0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=253740891]
 stream = ExtResource("7_2di0k")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1204070498]
+stream = ExtResource("8_v4idy")
+autoplay = true

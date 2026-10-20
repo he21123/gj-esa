@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://danmh8luuh0qt" path="res://Scripts/player_Movement_2_Now_is_personal.gd" id="1_kpjcp"]
 [ext_resource type="Script" uid="uid://bnepuqscbnlwm" path="res://Scripts/playerCam.gd" id="2_af68g"]
 [ext_resource type="Script" uid="uid://c22tp3mftva12" path="res://Scripts/pickup.gd" id="3_af68g"]
-[ext_resource type="Script" uid="uid://dadltomubmhp3" path="res://Szenen/hide_point.gd" id="4_3mm40"]
+[ext_resource type="Script" uid="uid://dadltomubmhp3" path="res://Scripts/hide_point.gd" id="4_3mm40"]
 [ext_resource type="Texture2D" uid="uid://c6467sbtf7f7n" path="res://UI_Assets/hide_vignette.png" id="5_3mm40"]
 [ext_resource type="Texture2D" uid="uid://y7f2dnb5ar6r" path="res://Assets_2d/empty.png" id="6_y4n7y"]
 [ext_resource type="Texture2D" uid="uid://n2a5qf70q43o" path="res://Assets_2d/full.png" id="7_mpr15"]
+
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ggrg3"]
 

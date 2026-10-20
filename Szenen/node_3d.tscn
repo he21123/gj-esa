@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cf81qrvlmvia8"]
 
-[ext_resource type="Script" uid="uid://dphoivhopdqab" path="res://Szenen/node_3d.gd" id="1_n8wve"]
+[ext_resource type="Script" uid="uid://dphoivhopdqab" path="res://Scripts/node_3d.gd" id="1_n8wve"]
 [ext_resource type="Material" uid="uid://ci2gvpo6ox57c" path="res://shader.tres" id="2_w6nrp"]
 [ext_resource type="PackedScene" uid="uid://cnfe4aepknig4" path="res://Szenen/Player.tscn" id="3_ytq6r"]
 [ext_resource type="PackedScene" uid="uid://bku5n2j21msvj" path="res://Szenen/lift_object.tscn" id="4_d24jv"]

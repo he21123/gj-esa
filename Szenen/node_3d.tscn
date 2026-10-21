@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b7ww20hb2fajr" path="res://Scripts/Objective.gd" id="8_dpex8"]
 [ext_resource type="PackedScene" uid="uid://bkp60mftm23yc" path="res://Szenen/enemie.tscn" id="9_vgwgj"]
 [ext_resource type="Script" uid="uid://dbwjs2qxdygal" path="res://Scripts/ChaseTimer.gd" id="10_chst"]
+[ext_resource type="PackedScene" uid="uid://bckflvs25ikrh" path="res://waypoint.tscn" id="11_g5wax"]
 
 [sub_resource type="Environment" id="Environment_ggrg3"]
 background_mode = 1
@@ -99,11 +100,11 @@ horizontal_alignment = 1
 script = ExtResource("10_chst")
 enemy = NodePath("../../Enemie")
 
-[node name="Enemie" parent="." unique_id=240428950 node_paths=PackedStringArray("player") instance=ExtResource("9_vgwgj")]
+[node name="Enemie" parent="." unique_id=240428950 node_paths=PackedStringArray("player", "waypoints") instance=ExtResource("9_vgwgj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -10.860424)
 player = NodePath("../Player")
 Position_Out = Vector3(-9, 0, -10.86)
-Position_In = Vector3(-9, 0, -10.86)
+waypoints = [NodePath("../waypoint"), NodePath("../waypoint2"), NodePath("../waypoint3")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2046118169]
 navigation_mesh = SubResource("NavigationMesh_ggrg3")
@@ -115,3 +116,15 @@ use_collision = true
 collision_layer = 2
 collision_mask = 3
 mesh = SubResource("BoxMesh_pekrf")
+
+[node name="waypoint" parent="." unique_id=18027894 instance=ExtResource("11_g5wax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0.10000001, 4.4)
+wait_time = 4.0
+
+[node name="waypoint2" parent="." unique_id=1659507823 instance=ExtResource("11_g5wax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3999999, 0.10000001, 3.1)
+wait_time = 10.0
+
+[node name="waypoint3" parent="." unique_id=88562390 instance=ExtResource("11_g5wax")]
+transform = Transform3D(-0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881907, 1.5, 0.10000001, -3.1)
+wait_time = 1.0

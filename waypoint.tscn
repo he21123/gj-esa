@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bckflvs25ikrh"]
+
+[ext_resource type="Script" uid="uid://ci0e4rtc5bgd" path="res://Scripts/enemy_waypoint.gd" id="1_3d7rh"]
+
+[node name="waypoint" type="Marker3D" unique_id=18027894]
+script = ExtResource("1_3d7rh")

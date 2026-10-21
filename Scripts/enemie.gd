@@ -6,19 +6,15 @@ extends CharacterBody3D
 var speed= 7.0
 
 
-enum state { WAITING, ENTERING, IN, LEAVING}
+enum state { WAITING, PATROL, RETURN, CHASING }
 
 @export var Speed: float = 4.0
 @export var TimeOut: float = 30.0
-@export var TimeIn: float = 10.0
 
 @export var Position_Out: Vector3 = Vector3(20, 0, 0)
-@export var Position_In: Vector3 = Vector3(0, 0, 0)
-@export var Position_Lost: Vector3 = Vector3(0, 0, 0)
 
 @export var arrive_distance: float = 1.5
 
-@export_group("Periodic Chase")
 @export var chase_enabled: bool = true
 
 @export_group("Sight")
@@ -36,80 +32,88 @@ enum state { WAITING, ENTERING, IN, LEAVING}
 @export var cone_height: float = 6.0
 @export var cone_forward_offset: float = 0.35
 @export var cone_fade: float = 0.6
+@export var view_turn_speed: float = 5.0
+
+@export_group("Target Facing (degrees)")
+@export_range(-180.0, 180.0) var Facing_Out: float = 0.0
+
+@export_group("Waypoints")
+@export var waypoints: Array[EnemyWaypoint] = []
 
 @onready var Wait_time: Timer = $Timer
 
 var State: state= state.WAITING
 var hide_point: Marker3D
 var startle_turn: bool = false
-var alerted: bool = false
-var heading_to_lost: bool = false
+var view_yaw: float = 0.0
+var facing_yaw: float = 0.0
+var sprite: Node3D
 
 var _cone: Decal
+var _wp_index: int = 0
+var _wp_wait_left: float = 0.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
 	player= get_tree().get_nodes_in_group("Player")[0]
 	hide_point= player.get_node_or_null("Camera3D/HidePoint")
+	sprite= get_node_or_null("MeshInstance3D")
 	
 	global_position = Position_Out
 	Wait_time.wait_time = TimeOut
 	Wait_time.one_shot = true
 	Wait_time.timeout.connect(_on_timer_espera_timeout)
+	view_yaw = rotation.y
+	facing_yaw = deg_to_rad(Facing_Out)
+	State= state.WAITING
 	if chase_enabled:
 		Wait_time.start()
-	State= state.WAITING
 	_setup_viewcone()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	#-----STATE_MACHINE
 	match State:
 		state.WAITING:
-			_show_viewcone(false)
 			velocity=Vector3.ZERO
 			move_and_slide()
-		state.ENTERING:
+		state.PATROL:
 			_check_player_sight()
-			_show_viewcone(true)
 			if startle_turn:
 				velocity=Vector3.ZERO
 				move_and_slide()
-			else:
-				_go_to(Position_In)
-				if _arrived_at(Position_In):
-					State= state.IN
-					heading_to_lost= false
-					Wait_time.wait_time=TimeIn
-					Wait_time.start()
-		state.IN:
-			_check_player_sight()
-			_show_viewcone(true)
-			if startle_turn:
+			elif _wp_wait_left > 0.0:
 				velocity=Vector3.ZERO
 				move_and_slide()
-			elif alerted:
-				_follow()
-			elif heading_to_lost:
-				_go_to(Position_Lost)
-				if _arrived_at(Position_Lost):
-					State= state.LEAVING
+				_wp_wait_left-= delta
+				if _wp_wait_left <= 0.0:
+					_advance_after_wait()
 			else:
-				velocity=Vector3.ZERO
-				move_and_slide()
-				_face_player()
-		state.LEAVING:
-			_show_viewcone(false)
+				var wp: EnemyWaypoint= _waypoint_at(_wp_index)
+				if wp == null:
+					_advance_after_wait()
+				else:
+					_go_to(wp.global_position)
+					if _arrived_at(wp.global_position):
+						facing_yaw= wp.global_rotation.y
+						_wp_wait_left= maxf(wp.wait_time, 0.0)
+		state.RETURN:
 			_go_to(Position_Out)
 			if _arrived_at(Position_Out):
-				State=state.WAITING
-				alerted= false
-				heading_to_lost= false
+				facing_yaw= deg_to_rad(Facing_Out)
+				State= state.WAITING
 				Wait_time.wait_time=TimeOut
 				Wait_time.start()
-				get_tree().call_group("Player", "_enemy_chase_over")
-				
+		state.CHASING:
+			if startle_turn:
+				velocity=Vector3.ZERO
+				move_and_slide()
+			else:
+				_follow()
+	_show_viewcone(State == state.PATROL)
+	_update_viewcone(delta)
+	_face_player()
 
 func  _go_to(objective:Vector3):
 	Nav_agent.set_target_position(objective)
@@ -121,9 +125,7 @@ func  _go_to(objective:Vector3):
 	var next_location: Vector3 = Nav_agent.get_next_path_position()
 	velocity= global_position.direction_to(next_location)*speed
 	move_and_slide()
-	
-	_face_player()
-	
+
 func _follow():
 	Nav_agent.set_target_position(player.global_position)
 	
@@ -132,26 +134,54 @@ func _follow():
 	var next_location: Vector3= Nav_agent.get_next_path_position()
 	velocity= global_position.direction_to(next_location)* speed
 	move_and_slide()
-	
-	_face_player()
-	
+
 
 func _face_player() -> void:
-	look_at(player.global_position, Vector3.UP, true)
-	rotation.x = 0
+	if player == null:
+		return
+	var target: Node3D= sprite if sprite != null else self
+	var dir: Vector3= player.global_position - target.global_position
+	dir.y= 0.0
+	if dir.length_squared() < 0.000001:
+		return
+	var parent:= target.get_parent() as Node3D
+	var parent_yaw:= 0.0
+	if parent != null:
+		parent_yaw= parent.global_rotation.y
+	target.rotation= Vector3(0.0, wrapf(atan2(dir.x, dir.z) - parent_yaw, -PI, PI), 0.0)
+
+func _update_viewcone(delta: float) -> void:
+	var target_yaw:= facing_yaw
+	if Vector2(velocity.x, velocity.z).length() > 0.1:
+		target_yaw= atan2(velocity.x, velocity.z)
+	view_yaw= lerp_angle(view_yaw, target_yaw, 1.0 - exp(-view_turn_speed * delta))
+	rotation.y= view_yaw
+
+func _waypoint_at(index: int) -> EnemyWaypoint:
+	if waypoints.is_empty():
+		return null
+	return waypoints[wrapi(index, 0, waypoints.size())]
+
+func _advance_after_wait() -> void:
+	_wp_wait_left= 0.0
+	if _wp_index + 1 >= waypoints.size():
+		State= state.RETURN
+	else:
+		_wp_index= wrapi(_wp_index + 1, 0, waypoints.size())
 
 
 func _on_timer_espera_timeout():
 	if not chase_enabled:
 		return
-	if State == state.WAITING:
-		State = state.ENTERING
-		alerted = false
-	elif State == state.IN:
-		if alerted:
-			State = state.LEAVING
-		else:
-			heading_to_lost = true
+	if State != state.WAITING:
+		return
+	if waypoints.is_empty():
+		Wait_time.wait_time= TimeOut
+		Wait_time.start()
+		return
+	_wp_index= 0
+	_wp_wait_left= 0.0
+	State= state.PATROL
 
 func _startle_done() -> void:
 	startle_turn = false
@@ -170,15 +200,11 @@ func _arrived_at(objective: Vector3) -> bool:
 			and _flat_distance_to(objective) < arrive_distance
 
 func _check_player_sight() -> void:
-	if alerted or startle_turn or not chase_enabled:
+	if State != state.PATROL or startle_turn or not chase_enabled:
 		return
 	if not _can_see_player():
 		return
-	alerted = true
-	State = state.IN
-	Wait_time.stop()
-	Wait_time.wait_time = TimeIn
-	Wait_time.start()
+	State = state.CHASING
 	startle_turn = true
 	get_tree().call_group("Player", "_enemy_start_chase", self)
 
@@ -239,4 +265,4 @@ func _make_cone_texture() -> ImageTexture:
 func _show_viewcone(hunting: bool) -> void:
 	if _cone == null:
 		return
-	_cone.visible = hunting and show_viewcone and chase_enabled and not alerted
+	_cone.visible = hunting and show_viewcone and chase_enabled

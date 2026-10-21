@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://y7f2dnb5ar6r" path="res://Assets_2d/empty.png" id="6_y4n7y"]
 [ext_resource type="Texture2D" uid="uid://n2a5qf70q43o" path="res://Assets_2d/full.png" id="7_mpr15"]
 
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_ggrg3"]
+radius = 1.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cxr5p"]
 

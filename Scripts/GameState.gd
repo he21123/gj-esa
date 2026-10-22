@@ -13,7 +13,6 @@ func take_damage():
 	if Invencibility != true:
 		lose_life.emit()
 		ActualHP-=1
-		print(ActualHP)
 		Invencibility=true
 		await get_tree().create_timer(Invencibility_time).timeout
 		Invencibility=false

@@ -27,12 +27,10 @@ func _pressed():
 	get_tree().quit()
 
 func _on_area_2d_mouse_entered() -> void:
-	print("ssss")
 	SfxOverButton.play()
 	is_maus_over=true
 	pass # Replace with function body.
 	
 func _mouse_exited():
-	print("aaaa")
 	is_maus_over=false
 	pass

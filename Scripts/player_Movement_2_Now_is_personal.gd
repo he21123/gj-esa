@@ -73,7 +73,6 @@ func _physics_process(delta: float) -> void:
 				speed *= 1.5
 			elif Current_State == STATE.CROUCHED:
 				speed *= 0.6
-				print(GameState.ActualHP)
 			
 			if input_vector.length() > 0.0:
 				velocity.x = direction.x * speed

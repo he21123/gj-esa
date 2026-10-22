@@ -48,10 +48,12 @@ var startle_turn: bool = false
 var view_yaw: float = 0.0
 var facing_yaw: float = 0.0
 var sprite: Node3D
+var distraction: bool = false
 
 var _cone: Decal
 var _wp_index: int = 0
 var _wp_wait_left: float = 0.0
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,6 +74,7 @@ func _ready() -> void:
 	_setup_viewcone()
 
 func _physics_process(delta: float) -> void:
+	#distraction = clock.ringing ?
 	
 	#-----STATE_MACHINE
 	match State:
@@ -94,10 +97,18 @@ func _physics_process(delta: float) -> void:
 				if wp == null:
 					_advance_after_wait()
 				else:
+					if wp.conditional:
+						if distraction:
+							pass
+						else: 
+							_wp_index += 1
+							wp = _waypoint_at(_wp_index)
+							
 					_go_to(wp.global_position)
 					if _arrived_at(wp.global_position):
 						facing_yaw= wp.global_rotation.y
 						_wp_wait_left= maxf(wp.wait_time, 0.0)
+
 		state.RETURN:
 			_go_to(Position_Out)
 			if _arrived_at(Position_Out):
@@ -160,7 +171,10 @@ func _update_viewcone(delta: float) -> void:
 func _waypoint_at(index: int) -> EnemyWaypoint:
 	if waypoints.is_empty():
 		return null
-	return waypoints[wrapi(index, 0, waypoints.size())]
+	
+	var i = wrapi(index, 0, waypoints.size())
+	return waypoints[i]
+		
 
 func _advance_after_wait() -> void:
 	_wp_wait_left= 0.0

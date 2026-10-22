@@ -18,5 +18,4 @@ func _on_texture_rect_mouse_entered() -> void:
 
 
 func _on_control_mouse_entered() -> void:
-	print("aaaa")
 	pass # Replace with function body.
